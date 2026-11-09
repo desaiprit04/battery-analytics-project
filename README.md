@@ -2,7 +2,7 @@
 
 A Python-based exploratory battery analytics project using the NASA B0005 lithium-ion battery cycling dataset. The project examines discharge-cycle behaviour, capacity degradation, relative State of Health (SoH), and statistically unusual cycles.
 
-> \*\*Project scope:\*\* This is an educational, exploratory analysis of a single-cell cycling dataset. It is not a validated battery fault-detection system and does not represent grid-scale battery energy storage system (BESS) operational data.
+> \\\*\\\*Project scope:\\\*\\\* This is an educational, exploratory analysis of a single-cell cycling dataset. It is not a validated battery fault-detection system and does not represent grid-scale battery energy storage system (BESS) operational data.
 
 ## Project objectives
 
@@ -28,6 +28,40 @@ The dataset contains charge and discharge operations. This project extracts the 
 
 **Dataset attribution:** NASA Ames Prognostics Center of Excellence (PCoE), battery aging dataset. Please consult the original NASA dataset page and its terms before redistributing the raw data. This repository should contain the analysis code and documentation; do not upload the raw `.mat` file unless redistribution is permitted.
 
+
+
+Download the dataset:
+
+NASA Battery Data Set (ZIP)
+Link: https://phm-datasets.s3.amazonaws.com/NASA/5.+Battery+Data+Set.zip
+
+NASA PCoE Data Set Repository
+Link: https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/
+
+Setup Instructions
+
+1. Download the Battery Data Set ZIP archive using the link above.
+
+2. Extract the downloaded archive and locate B0005.mat in the extracted files.
+
+3. Copy B0005.mat into this project's data/ directory.
+
+4. Make sure the file structure looks like this:
+
+battery-analytics-project/
+├── data/
+│   └── B0005.mat
+├── outputs/
+├── README.md
+└── requirements.txt
+
+Note: The original dataset is not included in this GitHub repository. The .mat file is excluded through .gitignore and must be downloaded separately.
+
+Dataset citation:
+
+Saha, B. and Goebel, K. (2007). Battery Data Set. NASA Prognostics Data Repository, NASA Ames Research Center, Moffett Field, CA.
+
+
 ## Analyses performed
 
 ### 1\. Discharge-cycle extraction
@@ -45,7 +79,7 @@ The extraction workflow reads the MATLAB `.mat` structure and creates a cycle-le
 Output:
 
 ```text
-outputs/discharge\_cycle\_summary.csv
+outputs/discharge\\\_cycle\\\_summary.csv
 ```
 
 ### 2\. Capacity degradation and relative SoH
@@ -53,7 +87,7 @@ outputs/discharge\_cycle\_summary.csv
 Capacity is plotted across discharge cycles. Relative SoH is calculated using the first recorded discharge capacity as the reference:
 
 ```python
-SoH\_percent = capacity\_Ah / first\_discharge\_capacity\_Ah \* 100
+SoH\\\_percent = capacity\\\_Ah / first\\\_discharge\\\_capacity\\\_Ah \\\* 100
 ```
 
 This is **relative capacity retention**, not a manufacturer-rated SoH value or a complete battery health diagnosis.
@@ -61,9 +95,9 @@ This is **relative capacity retention**, not a manufacturer-rated SoH value or a
 Expected outputs:
 
 ```text
-outputs/capacity\_degradation.png
-outputs/battery\_soh.png
-outputs/battery\_health\_analysis.csv
+outputs/capacity\\\_degradation.png
+outputs/battery\\\_soh.png
+outputs/battery\\\_health\\\_analysis.csv
 ```
 
 ### 3\. Voltage, current, and temperature profiles
@@ -73,7 +107,7 @@ The project visualises measured voltage, current, and temperature against elapse
 Expected output:
 
 ```text
-outputs/voltage\_current\_temperature.png
+outputs/voltage\\\_current\\\_temperature.png
 ```
 
 The sign of measured current follows the dataset's convention; negative current values are observed during discharge.
@@ -85,7 +119,7 @@ An Isolation Forest model is applied to cycle-level operating features, includin
 Expected output:
 
 ```text
-outputs/battery\_anomalies.png
+outputs/battery\\\_anomalies.png
 ```
 
 The contamination value is a modelling assumption. It is not a measured fault rate.
@@ -97,8 +131,8 @@ A second approach calculates deviations from rolling-median trends before applyi
 Expected outputs:
 
 ```text
-outputs/battery\_anomalies\_v2.png
-outputs/battery\_anomaly\_results\_v2.csv
+outputs/battery\\\_anomalies\\\_v2.png
+outputs/battery\\\_anomaly\\\_results\\\_v2.csv
 ```
 
 ### 6\. Investigation of selected cycles
@@ -106,6 +140,8 @@ outputs/battery\_anomaly\_results\_v2.csv
 Selected neighbouring cycles (including cycles 47, 48, and 49) are compared using their cycle summaries and raw measurement profiles. The verification workflow checks the exact timestamps of maximum temperature and minimum voltage.
 
 This investigation found that cycle 48 had a higher maximum measured temperature and lower minimum voltage than the adjacent cycles. These differences make it worth investigating, but they do **not** establish that the battery had a fault.
+
+
 
 ## Repository structure
 
@@ -117,31 +153,31 @@ battery-analytics-project/
 |   |-- B0005.mat (download separately; not included in Git)
 |
 |-- outputs/
-|   |-- battery_anomalies.png
-|   |-- battery_anomalies_v2.png
-|   |-- battery_anomaly_results.csv
-|   |-- battery_anomaly_results_v2.csv
-|   |-- battery_health_analysis.csv
-|   |-- battery_soh.png
-|   |-- capacity_degradation.png
-|   |-- cycle_47_48_49_comparison.png
-|   |-- discharge_cycle_summary.csv
-|   |-- voltage_current_temperature.png
+|   |-- battery\_anomalies.png
+|   |-- battery\_anomalies\_v2.png
+|   |-- battery\_anomaly\_results.csv
+|   |-- battery\_anomaly\_results\_v2.csv
+|   |-- battery\_health\_analysis.csv
+|   |-- battery\_soh.png
+|   |-- capacity\_degradation.png
+|   |-- cycle\_47\_48\_49\_comparison.png
+|   |-- discharge\_cycle\_summary.csv
+|   |-- voltage\_current\_temperature.png
 |
 |-- notebooks/
 |
-|-- battery_anomaly_detection.py
-|-- battery_anomaly_detection_v2.py
-|-- capacity_degradation.py
-|-- compare_discharge_profiles.py
-|-- explore_battery.py
-|-- extract_battery_data.py
-|-- inspect_battery.py
-|-- inspect_cycles.py
-|-- inspect_discharge.py
-|-- investigate_cycles.py
-|-- verify_cycles.py
-|-- voltage_temperature_analysis.py
+|-- battery\_anomaly\_detection.py
+|-- battery\_anomaly\_detection\_v2.py
+|-- capacity\_degradation.py
+|-- compare\_discharge\_profiles.py
+|-- explore\_battery.py
+|-- extract\_battery\_data.py
+|-- inspect\_battery.py
+|-- inspect\_cycles.py
+|-- inspect\_discharge.py
+|-- investigate\_cycles.py
+|-- verify\_cycles.py
+|-- voltage\_temperature\_analysis.py
 |
 |-- requirements.txt
 |-- README.md
@@ -179,19 +215,19 @@ scikit-learn
 Open a terminal in the project root. If you use the project's virtual environment in Windows Command Prompt:
 
 ```cmd
-.venv\\Scripts\\python.exe extract\_battery\_data.py
-.venv\\Scripts\\python.exe capacity\_degradation.py
-.venv\\Scripts\\python.exe voltage\_temperature\_analysis.py
-.venv\\Scripts\\python.exe battery\_anomaly\_detection.py
-.venv\\Scripts\\python.exe battery\_anomaly\_detection\_v2.py
+.venv\\\\Scripts\\\\python.exe extract\\\_battery\\\_data.py
+.venv\\\\Scripts\\\\python.exe capacity\\\_degradation.py
+.venv\\\\Scripts\\\\python.exe voltage\\\_temperature\\\_analysis.py
+.venv\\\\Scripts\\\\python.exe battery\\\_anomaly\\\_detection.py
+.venv\\\\Scripts\\\\python.exe battery\\\_anomaly\\\_detection\\\_v2.py
 ```
 
 Run the optional cycle-investigation scripts if they are present:
 
 ```cmd
-.venv\\Scripts\\python.exe investigate\_cycles.py
-.venv\\Scripts\\python.exe compare\_discharge\_profiles.py
-.venv\\Scripts\\python.exe verify\_cycles.py
+.venv\\\\Scripts\\\\python.exe investigate\\\_cycles.py
+.venv\\\\Scripts\\\\python.exe compare\\\_discharge\\\_profiles.py
+.venv\\\\Scripts\\\\python.exe verify\\\_cycles.py
 ```
 
 Run commands from the repository root so that relative paths such as `data/B0005.mat` and `outputs/` resolve correctly.
