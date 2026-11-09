@@ -286,7 +286,7 @@ Run commands from the repository root so that relative paths such as `data/B0005
 
 ## Author
 
-**[Prit Desai]**  
+**Prit Desai**  
 M.Sc. Information and Electrical Engineering student, Hochschule Wismar
 
 This project was developed as a self-directed learning project to build practical skills in Python-based battery data analysis.
